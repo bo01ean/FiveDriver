@@ -24,6 +24,9 @@
     <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
     <script src="/apps/fiveDriver/js/app.js"></script>
     <script type="text/javascript" src="//maps.googleapis.com/maps/api/js?key=AIzaSyC0p2CXXzNyDGT3TB8fLsbkYmwzQmUi2eQ"></script>
+    <script src="/apps/fiveDriver/bower_components/angular/angular.min.js"></script>
+    <script src="/apps/fiveDriver/bower_components/angular-bootstrap/ui-bootstrap.min.js"></script>
+
     <script type="text/javascript">
         var mapOptions = {};
         var map = {};
@@ -38,15 +41,14 @@
 
         var route = [];
 
-
         function errorHandler(error) {
             console.log("Error occurred. Error code: " + error.code + " " + error.message);
         }
 
         window.onload = function() {
             mapOptions = {
-                center: new google.maps.LatLng(32.750721399999996, -117.17515869999998),
-                zoom: 8
+                center: new google.maps.LatLng(5, -5),
+                zoom: 5
             };
 
             map = new google.maps.Map(document.getElementById("map-canvas"),
@@ -85,8 +87,10 @@
                         startPos.coords.latitude, startPos.coords.longitude,
                         position.coords.latitude, position.coords.longitude
                     );
+                    var currentLoc = new google.maps.LatLng(tmpObj.lat, tmpObj.lon);
 
-                    route.push(new google.maps.LatLng(tmpObj.lat, tmpObj.lon));
+                    map.panTo(currentLoc);
+                    route.push(currentLoc);
 
                     console.log(route);
 
